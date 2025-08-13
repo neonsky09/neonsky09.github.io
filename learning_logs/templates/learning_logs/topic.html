@@ -1,0 +1,26 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block page_header %}
+	<p>{{topic.text}}</p>
+{% endblock page_header %}
+
+{% block content %}
+	<p>
+			<a href="{% url 'learning_logs:new_entry' topic.id %}">添加内容</a>
+	</p>
+		{% for entry in entries %}
+			<div clas="card mc-3">
+				<h4 class="card-header">
+					{{ entry.date_added|date:'M d,Y H:i' }}
+					<small><a href="{% url 'learning_logs:edit_entry' entry.id %}"></a></small>
+				</h4>
+				<div class="card-body">{{ entry.text|linebreaks }}</div>
+			</div>
+		{% empty %}
+			<p>这个主题没有内容呢</p>
+		{% endfor %}
+	</ul>
+	
+{% endblock content %}
+
+			
